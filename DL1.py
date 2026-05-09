@@ -2,7 +2,7 @@
 He gave you the dataset to work on and you decided to use the Linear Regression Model. Create a
 model that will help him to estimate what the house would sell for.
 URL for a dataset:
-https://github.com/huzaifsayed/Linear-Regression-Model-for-House-PricePrediction/blob/master/USA_Housing.csv"""
+https://raw.githubusercontent.com/huzaifsayed/Linear-Regression-Model-for-House-Price-Prediction/refs/heads/master/USA_Housing.csv"""
 
 
 import pandas as pd
