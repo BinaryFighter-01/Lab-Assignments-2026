@@ -12,3 +12,35 @@ for _ in range(5):
 
 best = max(p, key=f)
 print(best, f(best))
+
+
+# import random
+
+# def fitness(x):
+#     return x * x
+
+# population = [random.randint(0,10) for _ in range(5)]
+
+# for _ in range(5):
+
+#     population.sort(key = fitness, reverse = True)
+
+#     best = population[:2]
+
+#     clones = []
+
+#     for  b in best:
+#         clones.append(b)
+#         clones.append(b)
+
+#     new_population = []
+
+#     for c in clones:
+#         mutation = random.randint(-1,1)
+#         new_population.append(mutation+c)
+
+#     population = new_population
+
+# best_solution = max(population,key=fitness)
+# print(best_solution)
+# print(fitness(best_solution))
