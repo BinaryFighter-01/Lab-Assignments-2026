@@ -1,3 +1,72 @@
+# Version 1
+
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Embedding, SimpleRNN, Dense
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+
+# Sample reviews
+texts = [
+    "good product",
+    "bad quality",
+    "excellent phone",
+    "worst item",
+    "nice service",
+    "poor battery"
+]
+
+# Labels
+# 1 = Positive
+# 0 = Negative
+labels = [1,0,1,0,1,0]
+
+# Convert text to numbers
+tokenizer = tf.keras.preprocessing.text.Tokenizer()
+tokenizer.fit_on_texts(texts)
+
+seq = tokenizer.texts_to_sequences(texts)
+
+# Same length sequences
+X = pad_sequences(seq, maxlen=3)
+
+y = labels
+
+# Build RNN model
+model = Sequential([
+    
+    Embedding(input_dim=50, output_dim=8, input_length=3),
+
+    SimpleRNN(8),
+
+    Dense(1, activation='sigmoid')
+])
+
+# Compile
+model.compile(
+    optimizer='adam',
+    loss='binary_crossentropy',
+    metrics=['accuracy']
+)
+
+# Train
+model.fit(X, y, epochs=100, verbose=0)
+
+# Prediction
+test = tokenizer.texts_to_sequences(
+    ["good service"]
+)
+
+test = pad_sequences(test, maxlen=3)
+
+pred = model.predict(test)
+
+print("Prediction =", pred[0][0])
+
+
+
+
+# Version 2
+
 import networkx as nx
 import matplotlib.pyplot as plt
 from tensorflow.keras.preprocessing.text import Tokenizer
