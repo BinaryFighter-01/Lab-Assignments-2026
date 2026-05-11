@@ -6,37 +6,59 @@ https://raw.githubusercontent.com/huzaifsayed/Linear-Regression-Model-for-House-
 
 
 import pandas as pd
+import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn import metrics
-import numpy as np
 
-# Load dataset
+# Load Dataset
 url = "https://raw.githubusercontent.com/bcbarsness/machine-learning/master/USA_Housing.csv"
-data = pd.read_csv(url)
 
-# Features and target
-X = data[['Avg. Area Income', 'Avg. Area House Age',
-          'Avg. Area Number of Rooms', 'Avg. Area Number of Bedrooms',
-          'Area Population']]
-y = data['Price']
+df = pd.read_csv(url)
 
-# Split data
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# Features and Target
+X = df[['Avg. Area Income',
+        'Avg. Area House Age',
+        'Avg. Area Number of Rooms',
+        'Avg. Area Number of Bedrooms',
+        'Area Population']]
 
-# Train model
+y = df['Price']
+
+# Split Dataset
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2
+)
+
+# Create and Train Model
 model = LinearRegression()
+
 model.fit(X_train, y_train)
 
-# Predict
-predictions = model.predict(X_test)
+# Prediction
+pred = model.predict(X_test)
 
-# Evaluation metrics
-mae = metrics.mean_absolute_error(y_test, predictions)
-rmse = np.sqrt(metrics.mean_squared_error(y_test, predictions))
+# Evaluation
+mae = metrics.mean_absolute_error(y_test, pred)
 
-print("MAE:", mae)
-print("RMSE:", rmse)
+rmse = np.sqrt(metrics.mean_squared_error(y_test, pred))
+
+# Output
+print("----- House Price Prediction -----\n")
+
+print("Sample Predictions:\n")
+
+for i in range(5):
+
+    print("Actual Price    :", round(y_test.iloc[i], 2))
+
+    print("Predicted Price :", round(pred[i], 2))
+
+    print()
+
+print("MAE  =", round(mae, 2))
+
+print("RMSE =", round(rmse, 2))
 
 
 # What they actually mean
